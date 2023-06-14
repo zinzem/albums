@@ -1,0 +1,42 @@
+package com.albums.android
+
+import androidx.multidex.MultiDexApplication
+import com.albums.android.core.di.coreModule
+import com.albums.android.di.appModule
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.Logger
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
+import org.koin.core.logger.MESSAGE
+import org.koin.core.module.Module
+
+class MyApplication: MultiDexApplication() {
+
+    private val modules : List<Module> = listOf(appModule, coreModule)
+
+    override fun onCreate() {
+        super.onCreate()
+
+        // Init Logger
+        Logger.addLogAdapter(AndroidLogAdapter())
+
+        // Init DI
+        startKoin {
+            androidContext(this@MyApplication)
+
+            logger(object: org.koin.core.logger.Logger() {
+                override fun log(level: Level, msg: MESSAGE) {
+                    when(level) {
+                        Level.DEBUG -> Logger.d("koin: $msg")
+                        Level.INFO -> Logger.i("koin: $msg")
+                        Level.ERROR -> Logger.e("koin: $msg")
+                        else -> Logger.v("koin: $msg")
+                    }
+                }
+            })
+
+            modules(modules)
+        }
+    }
+}

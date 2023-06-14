@@ -1,0 +1,12 @@
+<resources>
+    <dimen name="spacing_xs">1dp</dimen>
+    <dimen name="spacing_s">5dp</dimen>
+    <dimen name="spacing_m">10dp</dimen>
+    <dimen name="spacing_l">15dp</dimen>
+    <dimen name="spacing_xl">20dp</dimen>
+
+    <dimen name="text_h1">25sp</dimen>
+    <dimen name="text_h2">20sp</dimen>
+    <dimen name="text_h3">15sp</dimen>
+    <dimen name="text_body">10sp</dimen>
+</resources>
